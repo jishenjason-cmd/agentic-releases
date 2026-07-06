@@ -88,21 +88,33 @@ fi
 
 # ── Verify ──────────────────────────────────────
 
-echo ""
-if "$BIN_PATH" --version >/dev/null 2>&1; then
-  echo "✅ agentic $($BIN_PATH --version) installed!"
-else
-  echo "⚠️  Binary verification failed. Try running: $BIN_PATH --version"
+# ── Reload PATH ─────────────────────────────────
+
+SHELL_NAME=$(basename "$SHELL")
+case "$SHELL_NAME" in
+  zsh)  RC="$HOME/.zshrc" ;;
+  bash) RC="$HOME/.bashrc" ;;
+  *)    RC="" ;;
+esac
+
+if [ -n "$RC" ] && [ -f "$RC" ]; then
+  export PATH="$BIN_DIR:$PATH"
+  echo "   ✓ PATH configured ($RC)"
 fi
 
 echo ""
-echo "   Start: agentic"
+if "$BIN_PATH" --version >/dev/null 2>&1; then
+  echo "✅ agentic $( $BIN_PATH --version) installed!"
+else
+  echo "⚠️  Binary not in PATH yet. Run: export PATH=\"$BIN_DIR:\$PATH\""
+fi
+
 echo ""
-echo "   Next steps:"
-echo "   1. Configure provider in $CFG_FILE"
-echo "   2. Restart terminal or: source ~/.zshrc"
+echo "   Usage: agentic"
+echo ""
+echo "   Configure provider: $CFG_FILE"
 echo ""
 echo "   Optional — AI memory summarization:"
-echo "     export AGENTIC_MEMORY_SUMMARIZER_BASE_URL=https://api.deepseek.com/v1"
-echo "     export AGENTIC_MEMORY_SUMMARIZER_MODEL=deepseek-v4-flash"
-echo "     export AGENTIC_MEMORY_SUMMARIZER_API_KEY=sk-xxx"
+echo "     AGENTIC_MEMORY_SUMMARIZER_BASE_URL=https://api.deepseek.com/v1"
+echo "     AGENTIC_MEMORY_SUMMARIZER_MODEL=deepseek-v4-flash"
+echo "     AGENTIC_MEMORY_SUMMARIZER_API_KEY=sk-xxx"
