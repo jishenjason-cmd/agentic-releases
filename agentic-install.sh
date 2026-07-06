@@ -5,7 +5,7 @@ echo "agentic — AI-powered terminal coding agent"
 echo "==========================================="
 
 VERSION="${AGENTIC_VERSION:-v0.3.0-dev}"
-REPO="jishenjason-cmd/vector-workshop"
+REPO="jishenjason-cmd/agentic-releases"
 INSTALL_DIR="$HOME/.agentic"
 BIN_DIR="$HOME/.local/bin"
 BIN_PATH="$BIN_DIR/agentic"
