@@ -86,8 +86,6 @@ if [ ! -f "$CFG_FILE" ]; then
 CONFIG
 fi
 
-# ── Verify ──────────────────────────────────────
-
 # ── Reload PATH ─────────────────────────────────
 
 SHELL_NAME=$(basename "$SHELL")
@@ -114,7 +112,9 @@ echo "   Usage: agentic"
 echo ""
 echo "   Configure provider: $CFG_FILE"
 echo ""
-echo "   Optional — AI memory summarization:"
-echo "     AGENTIC_MEMORY_SUMMARIZER_BASE_URL=https://api.deepseek.com/v1"
-echo "     AGENTIC_MEMORY_SUMMARIZER_MODEL=deepseek-v4-flash"
-echo "     AGENTIC_MEMORY_SUMMARIZER_API_KEY=sk-xxx"
+echo "   Optional — AI memory (agentmemory):"
+echo "     export ANTHROPIC_API_KEY=sk-ant-xxx   # or OPENAI/GEMINI/OPENROUTER/MINIMAX"
+echo "     # 国产厂商用 OpenAI 兼容模式，例如 DeepSeek:"
+echo "     export OPENAI_API_KEY=\$DEEPSEEK_API_KEY"
+echo "     export OPENAI_BASE_URL=https://api.deepseek.com/v1"
+echo "     # 或写入 ~/.agentmemory/.env 文件（重启生效）"
